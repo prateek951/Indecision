@@ -27,7 +27,8 @@ class Action extends Component {
 }
 
 Action.propTypes = {
-  action: PropTypes.string.isRequired
+  action: PropTypes.string.isRequired,
+  length: PropTypes.number.isRequired
 };
 
 export default Action;

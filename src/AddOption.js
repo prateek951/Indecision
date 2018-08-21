@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types'
 
 export default class AddOption extends Component {
   constructor(props) {
@@ -26,7 +27,6 @@ export default class AddOption extends Component {
 
   render() {
     const { decision } = this.state;
-    const { length } = this.props;
     return (
       <div>
         <input
@@ -40,4 +40,8 @@ export default class AddOption extends Component {
       </div>
     );
   }
+}
+
+AddOption.propTypes = {
+  addOption: PropTypes.func.isRequired
 }

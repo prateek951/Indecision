@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import Option from "./Option";
 
 class Options extends Component {
@@ -16,12 +17,12 @@ class Options extends Component {
     this.props.removeAll();
   }
   render() {
-    const { options } = this.props;
+    const { options, deleteOption } = this.props;
     return (
       <div>
         <ul>
           {options.map((option, index) => (
-            <Option key={index} option={option} />
+            <Option key={index} option={option} deleteOption={deleteOption} />
           ))}
         </ul>
         <button onClick={this.handleRemoveAll}>Remove all decisions</button>
@@ -29,4 +30,10 @@ class Options extends Component {
     );
   }
 }
+
+Options.propTypes = {
+  options: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  deleteOption: PropTypes.func.isRequired     
+};
+
 export default Options;
