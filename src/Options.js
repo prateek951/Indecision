@@ -17,12 +17,12 @@ class Options extends Component {
     this.props.removeAll();
   }
   render() {
-    const { options, deleteOption } = this.props;
+    const { options, deleteOption, clicked } = this.props;
     return (
       <div>
         <ul>
           {options.map((option, index) => (
-            <Option key={index} option={option} deleteOption={deleteOption} />
+            <Option key={index} option={option} clicked={clicked} deleteOption={deleteOption} />
           ))}
         </ul>
         <button onClick={this.handleRemoveAll}>Remove all decisions</button>
@@ -33,7 +33,8 @@ class Options extends Component {
 
 Options.propTypes = {
   options: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  deleteOption: PropTypes.func.isRequired     
+  deleteOption: PropTypes.func.isRequired,
+  clicked: PropTypes.func.isRequired     
 };
 
 export default Options;

@@ -1,15 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Option =  ({option, deleteOption}) => {
+const Option =  ({option,clicked}) => {
   return (
-    <li onClick={deleteOption}>{option}</li>
+    <li onClick={clicked}>{option}</li>
   )
 }
 
 Option.propTypes = {
   option: PropTypes.string.isRequired,
-  deleteOption: PropTypes.func.isRequired
+  deleteOption: PropTypes.func.isRequired,
+  clicked: PropTypes.func.isRequired
 }
 
 

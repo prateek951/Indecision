@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types";
 
 export default class AddOption extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      decision: ""
+      decision: "",
+      feedback: ""
     };
     this.bindEvents();
   }
@@ -20,15 +21,25 @@ export default class AddOption extends Component {
     e.preventDefault();
     const { decision } = this.state;
     if (decision) {
-      this.props.addOption(decision);
-      this.setState({ decision: "" });
+      if (this.props.options.indexOf(decision) > -1) {
+        this.setState({ feedback: "Decision already exists", decision: '' });
+      } else {
+        this.props.addOption(decision);
+        this.setState({ decision: "" });
+      }
+    } else {
+      this.setState({ feedback: "Enter a valid decision to add" });
     }
   }
 
   render() {
-    const { decision } = this.state;
+    const { decision, feedback } = this.state;
+    const styles = {
+      color: "red"
+    };
     return (
       <div>
+        {feedback && <h2 style={styles}>{feedback}</h2>}
         <input
           type="text"
           name="decision"
@@ -44,4 +55,4 @@ export default class AddOption extends Component {
 
 AddOption.propTypes = {
   addOption: PropTypes.func.isRequired
-}
+};

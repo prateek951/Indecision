@@ -11,20 +11,18 @@ class App extends Component {
       title: "Indecision Application",
       subtitle: "Put your life in the hands of a computer",
       action: "What should I do?",
-      options: [
-        "Playing cricket",
-        "Coding",
-        "Understanding Life",
-        "Beauty of Nature",
-        "Exercise",
-        "Yoga"
-      ]
+      options: []
     };
   }
+  componentDidMount() {
+    fetch('https://raw.githubusercontent.com/prateek951/AngularJSONs/master/options.json')
+    .then(response => response.json())
+    .then(data => this.setState({options: data.options}));
+  }
   addOption = option => {
-    const options = [...this.state.options];
-    options.unshift(option);
-    this.setState({ options });
+    // Using the concat method one choice as well for immutable addition
+    //returns a new array
+    this.setState({ options: this.state.options.concat([option]) });
   };
   deleteOption = option => {
     const { options } = this.state;
@@ -33,6 +31,9 @@ class App extends Component {
   };
   removeAll = () => {
     this.setState({ options: [] });
+  };
+  optionWasClicked = () => {
+    alert("Great decision! Stick to it and follow it religiously!");
   };
 
   render() {
@@ -45,12 +46,12 @@ class App extends Component {
           options={options}
           deleteOption={this.deleteOption}
           removeAll={this.removeAll}
+          clicked={this.optionWasClicked}
         />
-        <AddOption addOption={this.addOption} />
+        <AddOption options={options} addOption={this.addOption} />
       </div>
     );
   }
 }
 
 export default App;
-
