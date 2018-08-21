@@ -11,13 +11,15 @@ class App extends Component {
       title: "Indecision Application",
       subtitle: "Put your life in the hands of a computer",
       action: "What should I do?",
-      options: []
+      options: [
+        "Playing cricket",
+        "Coding",
+        "Understanding Life",
+        "Beauty of Nature",
+        "Exercise",
+        "Yoga"
+      ]
     };
-  }
-  componentDidMount() {
-    fetch('https://raw.githubusercontent.com/prateek951/AngularJSONs/master/options.json')
-    .then(response => response.json())
-    .then(data => this.setState({options: data.options}));
   }
   addOption = option => {
     // Using the concat method one choice as well for immutable addition
@@ -25,9 +27,8 @@ class App extends Component {
     this.setState({ options: this.state.options.concat([option]) });
   };
   deleteOption = option => {
-    const { options } = this.state;
-    options.splice(options.indexOf(option), 1);
-    this.setState({ options });
+    console.log("[deleteOption] App");
+    this.setState({ options: this.state.options.filter(op => option !== op) });
   };
   removeAll = () => {
     this.setState({ options: [] });
@@ -53,5 +54,9 @@ class App extends Component {
     );
   }
 }
+
+App.defaultProps = {
+  options: []
+};
 
 export default App;

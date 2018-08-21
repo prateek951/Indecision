@@ -1,9 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Option =  ({option,clicked}) => {
+const Option =  ({option,deleteOption,clicked}) => {
   return (
-    <li onClick={clicked}>{option}</li>
+    <div>
+      <li onClick={clicked}>{option}</li> 
+      <span><button onClick={e => deleteOption(option)}>X</button></span>
+    </div>
   )
 }
 
