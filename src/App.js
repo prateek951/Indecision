@@ -11,21 +11,38 @@ class App extends Component {
       title: "Indecision Application",
       subtitle: "Put your life in the hands of a computer",
       action: "What should I do?",
-      options: [
-        "Playing cricket",
-        "Coding",
-        "Understanding Life",
-        "Beauty of Nature",
-        "Exercise",
-        "Yoga"
-      ]
+      options: []
     };
   }
+
+  componentDidMount() {
+    try {
+      console.log("Fetching data[componentDidMount]");
+      if (localStorage.options) {
+        this.setState({ options: JSON.parse(localStorage.options) });
+      }
+    } catch (error) {
+      console.log('Invalid JSON');
+    }
+  }
+  componentDidCatch(error, info) {
+    console.log("[componentDidCatch] App");
+  }
+  
+
   addOption = option => {
     // Using the concat method one choice as well for immutable addition
     //returns a new array
+    //Set the option to the local state
+    console.log("Saving data");
     this.setState({ options: this.state.options.concat([option]) });
   };
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.options.length !== this.state.options.length) {
+      //Set the option to the localstorage
+      localStorage.setItem("options", JSON.stringify(this.state.options));
+    }
+  }
   deleteOption = option => {
     console.log("[deleteOption] App");
     this.setState({ options: this.state.options.filter(op => option !== op) });

@@ -12,6 +12,7 @@ const Options = ({ options, removeAll, deleteOption, clicked }) => {
   return (
     <div>
       <ul>
+      {options.length === 0 && <p>Please add a decision!</p>}
         {options.map((option, index) => (
           <Option
             key={index}
